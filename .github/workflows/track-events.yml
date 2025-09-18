@@ -20,12 +20,12 @@ jobs:
         
     - name: Run Event Tracker
       env:
-        SUBSTREAMS_API_TOKEN: ${{ secrets.SUBSTREAMS_TOKEN }}
+        SUBSTREAMS_API_TOKEN: eyJhbGciOiJLTVNFUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3OTM1ODM5MjYsImp0aSI6IjJhMDEwNTdhLWU4MjctNDAyMC04YTgxLTdmNzQ0MzYzMTI0NiIsImlhdCI6MTc1NzU4MzkyNiwiaXNzIjoiZGZ1c2UuaW8iLCJzdWIiOiIwc3lraWY0MWJiZDExNWI0YzAxYjQiLCJ2IjoyLCJha2kiOiI5NDk2NjA4ZDYxNzQzMjMwMTAwNDNhNGZhZWRkMTE3OGQ0YzRiMmQ1MWJhNGJlMGU1MDMzNDQzZjRjY2RjNTVhIiwidWlkIjoiMHN5a2lmNDFiYmQxMTViNGMwMWI0Iiwic3Vic3RyZWFtc19wbGFuX3RpZXIiOiJGUkVFIiwiY2ZnIjp7IlNVQlNUUkVBTVNfTUFYX1JFUVVFU1RTIjoiMiIsIlNVQlNUUkVBTVNfUEFSQUxMRUxfSk9CUyI6IjUiLCJTVUJTVFJFQU1TX1BBUkFMTEVMX1dPUktFUlMiOiI1In19.Mkx6WW6gWwPmc69NunrvJbkLg5ObqwGhM6s4e7dnBdnlhxapu3R78B9PGcQs60DKt_aFNG0JDUpzbByc39HnTg
       run: |
         timeout 180 ./substreams-sink-sql run \
-          "${{ secrets.DATABASE_URL }}" \
+          "postgres://eng_owner:7jW5CtLOdcTu@ep-nameless-field-a5c7j4n7-pooler.us-east-2.aws.neon.tech/eng?sslmode=require" \
           substreams/solana-substream-v0.1.0.spkg \
-          408677364: \
+          408678939: \
           --endpoint devnet.sol.streamingfast.io:443 \
           --final-blocks-only \
           --on-module-hash-mistmatch=ignore \

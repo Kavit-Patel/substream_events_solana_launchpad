@@ -25,7 +25,7 @@ jobs:
         timeout 180 ./substreams-sink-sql run \
           "${{ secrets.DATABASE_URL }}" \
           substreams/solana-substream-v0.1.0.spkg \
-          408673829: \
+          408674937: \
           --endpoint devnet.sol.streamingfast.io:443 \
           --final-blocks-only \
           --on-module-hash-mistmatch=ignore \

@@ -1,0 +1,32 @@
+name: Track Solana Events
+on:
+  schedule:
+    - cron: '*/5 * * * *'  # Every 5 minutes
+  workflow_dispatch:        # Manual trigger for testing
+
+jobs:
+  track-events:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Download substreams-sink-sql
+      run: |
+        wget https://github.com/streamingfast/substreams-sink-sql/releases/download/v4.6.7/substreams-sink-sql_linux_x86_64.tar.gz
+        tar -xzf substreams-sink-sql_linux_x86_64.tar.gz
+        chmod +x substreams-sink-sql
+        
+    - name: Run Event Tracker
+      env:
+        SUBSTREAMS_API_TOKEN: ${{ secrets.SUBSTREAMS_TOKEN }}
+      run: |
+        timeout 180 ./substreams-sink-sql run \
+          "${{ secrets.DATABASE_URL }}" \
+          substreams/solana-substream-v0.1.0.spkg \
+          408672129: \
+          --endpoint devnet.sol.streamingfast.io:443 \
+          --final-blocks-only \
+          --on-module-hash-mistmatch=ignore \
+          || true

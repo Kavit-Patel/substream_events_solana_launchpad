@@ -28,6 +28,4 @@ jobs:
           408678939: \
           --endpoint devnet.sol.streamingfast.io:443 \
           --final-blocks-only \
-          --on-module-hash-mismatch=ignore \
-          --development-mode \
           || true
